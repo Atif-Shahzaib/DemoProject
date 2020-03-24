@@ -1,0 +1,10 @@
+<% if user_signed_in? && current_user.isAdmin %>
+<%= simple_form_for @product do |f| %>
+    <%= f.input :title, label: "Title" %>
+    <%= f.input :price, label: "Price" %>
+    <%= f.file_field :image, label: "Image" %>
+    <%= f.button :submit %> 
+<% end %>
+<% else %>
+<p style="color:red"><%= "Permission Denied!"%></p>
+<% end %>

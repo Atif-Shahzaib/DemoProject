@@ -1,0 +1,16 @@
+<div class="col-md-8 col-md-offset-2">
+    <div class="product-show">
+        <h2><%= @product.title %></h2>
+        <p><%= @product.price%></p>
+        <%  if @product.image %>
+        <img style="width:200px;"src="<%= @product.image.url%>">
+        <%end %>
+        <%= link_to "Home", root_path %>
+        <% if user_signed_in? && current_user.isAdmin %>
+        <%= link_to "Edit", edit_product_path(@product)%>
+        <%= link_to "Delete", product_path(@product), method: :delete, data: { confirm: "Sure..?" } %>
+        <%end%>
+
+        <%= button_to "Add to cart", line_items_path(product_id: @product) %>
+    </div>
+</div>

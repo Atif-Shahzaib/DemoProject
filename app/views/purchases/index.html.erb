@@ -1,0 +1,12 @@
+<h1>PURCHASES</h1>
+
+<% @purchases.each do |purchase| %>
+        <h4><%= User.find_by(id: purchase.user_id).email %></h4>
+        <select>
+        <% purchase.line_items.each do |lineitem|%>
+            <option><%= Product.find_by(id: lineitem.product_id).title %></option>
+        <% end %>
+        </select>
+        <p><%= purchase.total_price%></p>
+        <hr>
+<%end%>

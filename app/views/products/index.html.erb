@@ -1,0 +1,9 @@
+<% @products.each do |pro| %>
+<div class="col-md-4">
+    <div class="product">
+        <h2 class="product-title"><%= pro.title %></h2>
+        <p><%= pro.price %></p>
+        <%= link_to "Details", product_path(pro), class: "btn-custom" %>
+    </div>
+</div>
+<%end%>

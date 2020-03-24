@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Ecommerce</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+       <div class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <b><%= link_to "E-MART", root_path, class: "navbar-brand" %></b>    
+          </div>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Sign Up", new_user_registration_path%></li>
+            <% if user_signed_in? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+            <% end %>
+          </ul>
+
+        <% if user_signed_in? %>
+          <% if cart_has_items %>
+          <div  class: "navbar-right navbar-text navbar-link">
+            <%= link_to cart_path(@cart) do%>
+              <span><i class="fa fa-shopping-cart"></i></span>
+              <span>Cart<%= cart_count_over_one%></span>
+          </div>
+            <% end %>
+          <% end %>
+        <%end%>
+          <% if user_signed_in? && current_user.isAdmin %>
+          <p><%= link_to "New Product", new_product_path ,class: "navbar-right navbar-text navbar-link"%></p>
+          <p><%= link_to "Purchases ", purchases_path ,class: "navbar-right navbar-text navbar-link"%></p>
+          <% end %>
+        </div> 
+      </div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <%= render 'layouts/alert' %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>
