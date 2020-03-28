@@ -20,9 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  username: 'leghari'
-  password: '697782555'
+  host: ec2-184-72-236-57.compute-1.amazonaws.com
+  username: 'uaoscmaqximxdz'
+  password: 'e9205dbb723c14c6d846dfe441e1db3d14c5443ce284cb0f24a71ab6675c832e'
 
 development:
   <<: *default
@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: ecommerce_production2
-  username: ecommerce
-  password: <%= ENV['ECOMMERCE_DATABASE_PASSWORD'] %>
+  database: ddskaiqbqsqv0v
+  username: uaoscmaqximxdz
+  password: e9205dbb723c14c6d846dfe441e1db3d14c5443ce284cb0f24a71ab6675c832e
