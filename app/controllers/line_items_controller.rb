@@ -4,7 +4,12 @@ class LineItemsController < ApplicationController
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.all.where(cart_id: @cart.id)
+    @c= Cart.find_by(cart_id: @cart.id, ischeckout: 'f')
+    if @c.nil?
+      @line_items = nil
+    else
+      @line_items = LineItem.all.where(cart_id: @cart.id)
+    end
   end
 
   # GET /line_items/1
@@ -55,7 +60,12 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @cart = Cart.find_by(user_id: current_user.id)
+    if current_user
+      @cart = Cart.find_by(user_id: current_user.id)
+    else
+      @cart= Cart.find_by_id(session[:cart_id])
+    end
+    @line_item= LineItem.find_by(id: params[:id])
     @line_item.destroy
     respond_to do |format|
       format.html { redirect_to cart_path(@cart), notice: 'Line item was successfully destroyed.' }

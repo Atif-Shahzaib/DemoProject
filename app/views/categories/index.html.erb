@@ -1,0 +1,42 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+td{
+  font-size: 15px;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+th {
+  font-size: 20px;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+
+<% if user_signed_in? && current_user.isAdmin %>
+<% @categories.each do |cat| %>
+            <h2><%= cat.title %></h2>
+        <table>
+    <thead>
+        <th>Title</th>
+        <th>Price</th>
+    </thead>
+    <tbody>
+    <% cat.products.each do |pro| %>
+        <tr>
+            <td><%= pro.title%></td>
+            <td><%= pro.price%></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+<hr>
+<%end%>
+<%end%>

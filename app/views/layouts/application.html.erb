@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://js.stripe.com/v3/"></script>
     <title>Ecommerce</title>
     <%= csrf_meta_tags %>
@@ -22,27 +23,24 @@
             <% else %>
             <li><%= link_to "Sign In", new_user_session_path %></li>
             <% end %>
-          </ul>
-
-        <% if user_signed_in? %>
-          <% if cart_has_items %>
-          <div  class: "navbar-right navbar-text navbar-link">
-            <%= link_to cart_path(@cart) do%>
-              <span><i class="fa fa-shopping-cart"></i></span>
-              <span>Cart<%= cart_count_over_one%></span>
-          </div>
+            <% if cart_has_items %>
+              <li><%= link_to cart_path(@cart) do%>
+                <i class="fa fa-shopping-cart"></i>
+                Cart<%= cart_count_over_one%></li>
+              <% end %>
             <% end %>
-          <% end %>
-        <%end%>
-          <% if user_signed_in? && current_user.isAdmin %>
-          <p><%= link_to "New Product", new_product_path ,class: "navbar-right navbar-text navbar-link"%></p>
-          <p><%= link_to "Purchases ", purchases_path ,class: "navbar-right navbar-text navbar-link"%></p>
+        </ul>
+          <% if user_signed_in? && current_user.isAdmin %>   
+          <%= link_to "New Product", new_product_path ,class: "navbar-right navbar-text navbar-link"%>
+          <%= link_to "New category", new_category_path ,class: "navbar-right navbar-text navbar-link"%>
+          <%= link_to "Purchases ", purchases_path ,class: "navbar-right navbar-text navbar-link"%>
+          <%= link_to "Categories ", categories_path ,class: "navbar-right navbar-text navbar-link"%>
           <% end %>
         </div> 
       </div>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-    <%= render 'layouts/alert' %>
+   
 
     <div class="container">
       <%= yield %>

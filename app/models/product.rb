@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
     before_destroy :not_referenced_by_any_line_item
     has_many :line_items
+    has_many :pro_cat_items , dependent: :destroy
+    has_many :categories, through: :pro_cat_items
     mount_uploader :image, ImageUploader
     validates :title, :price, :image, presence: true
     validates :title, length: {minimum: 3}

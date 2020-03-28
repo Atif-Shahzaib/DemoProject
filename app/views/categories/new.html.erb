@@ -1,0 +1,4 @@
+<% if user_signed_in? && current_user.isAdmin %>
+<h1>New Category</h1>
+<%= render 'form'%>
+<% end %>

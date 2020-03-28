@@ -25,8 +25,7 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    @cart= Cart.where(user_id: current_user && ischeckout= false)
-    if @cart==nil?
+    if @cart.nil?
       @cart = Cart.new(cart_params)
     end
     respond_to do |format|
@@ -57,11 +56,6 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    # if user_signed_in?
-    #   @cart.destroy if @cart.id == session[:cart_id] && current_user.id==session[:user_id]
-    # else
-    #   @cart.destroy if @cart.id == session[:cart_id]
-    # end
     @cart.destroy
     session[:cart_id]= nil
     respond_to do |format|

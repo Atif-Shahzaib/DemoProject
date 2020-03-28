@@ -1,10 +1,13 @@
 <% if user_signed_in? && current_user.isAdmin %>
-<%= simple_form_for @product do |f| %>
-    <%= f.input :title, label: "Title" %>
-    <%= f.input :price, label: "Price" %>
-    <%= f.file_field :image, label: "Image" %>
-    <%= f.button :submit %> 
-<% end %>
-<% else %>
-<p style="color:red"><%= "Permission Denied!"%></p>
+    <%= simple_form_for @product do |f| %>
+        <%= f.input :title, label: "Title" %>
+        <%= f.input :price, label: "Price" %>
+        <%= f.file_field :image, label: "Image" %>
+
+        <%= f.collection_check_boxes :categories, Category.all, :id, :title do |cat| %>
+            <% cat.label(class: "checkbox-inline input_checkbox") {cat.check_box(class: "checkbox") + cat.text } %>
+        <% end %>
+
+        <%= f.button :submit %> 
+    <% end %>
 <% end %>

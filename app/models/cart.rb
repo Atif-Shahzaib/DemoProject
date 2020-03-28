@@ -17,7 +17,8 @@ class Cart < ApplicationRecord
     end
 
     def checkout
-        self.ischeckout=true
-        self.save
+            @cart= Cart.find_by_id(id)
+            @cart.ischeckout=true
+            @cart.save
     end
 end

@@ -1,12 +1,45 @@
-<h1>PURCHASES</h1>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+<% if user_signed_in? && current_user.isAdmin %>
+<h1>PURCHASES</h1>
+<hr>
 <% @purchases.each do |purchase| %>
         <h4><%= User.find_by(id: purchase.user_id).email %></h4>
-        <select>
+        <table>
+        <thead>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
         <% purchase.line_items.each do |lineitem|%>
-            <option><%= Product.find_by(id: lineitem.product_id).title %></option>
+            <tr>
+                <td><%= Product.find_by(id: lineitem.product_id).title %></td>
+                <td><%=lineitem.quantity%></td>
+                <td><%= Product.find_by(id: lineitem.product_id).price * lineitem.quantity%></td>
+            </tr>
         <% end %>
-        </select>
-        <p><%= purchase.total_price%></p>
+        </tbody>
+        </table>
+        <div style="text-align:right; font-size:20px;" >
+        Total Price: <%= purchase.total_price%>
+        </div>
         <hr>
+<%end%>
 <%end%>
