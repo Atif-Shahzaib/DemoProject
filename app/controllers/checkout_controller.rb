@@ -1,6 +1,6 @@
 class CheckoutController < ApplicationController
     def create
-        @cart= Cart.find_by(session[:id])
+        @cart= Cart.find(params[:id])
         if @cart.nil?
             respond_to root_path
             return
