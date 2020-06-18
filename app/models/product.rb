@@ -4,9 +4,10 @@ class Product < ApplicationRecord
     has_many :pro_cat_items , dependent: :destroy
     has_many :categories, through: :pro_cat_items
     mount_uploader :image, ImageUploader
-    validates :title, :price, :image, presence: true
+    validates :price, :title, presence: true
     validates :title, length: {minimum: 3}
-    validates :price, numericality: {only_integer: true}, length: {maximum: 7}
+    # validates :title, :image, presence: true
+    # validates :price, numericality: {only_integer: true} , length: {maximum: 7}
     
     private
 

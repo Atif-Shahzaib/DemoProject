@@ -19,7 +19,8 @@ th {
 }
 </style>
 
-
+<h1>Categories Details</h1>
+<hr>
 <% if user_signed_in? && current_user.isAdmin %>
 <% @categories.each do |cat| %>
             <h2><%= cat.title %></h2>

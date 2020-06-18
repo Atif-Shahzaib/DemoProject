@@ -1,8 +1,6 @@
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   before_action :set_cart, only: [:create]
-  # GET /line_items
-  # GET /line_items.json
   def index
     @c= Cart.find_by(cart_id: @cart.id, ischeckout: 'f')
     if @c.nil?
@@ -12,22 +10,16 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # GET /line_items/1
-  # GET /line_items/1.json
   def show
   end
 
-  # GET /line_items/new
   def new
     @line_item = LineItem.new
   end
 
-  # GET /line_items/1/edit
   def edit
   end
 
-  # POST /line_items
-  # POST /line_items.json
   def create
     product= Product.find(params[:product_id])
     @line_item = @cart.add_product(product)
@@ -43,8 +35,6 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /line_items/1
-  # PATCH/PUT /line_items/1.json
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
@@ -56,9 +46,6 @@ class LineItemsController < ApplicationController
       end
     end
   end
-
-  # DELETE /line_items/1
-  # DELETE /line_items/1.json
   def destroy
     if current_user
       @cart = Cart.find_by(user_id: current_user.id)
@@ -74,12 +61,10 @@ class LineItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_line_item
       @line_item = LineItem.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def line_item_params
       params.require(:line_item).permit(:product_id)
     end
